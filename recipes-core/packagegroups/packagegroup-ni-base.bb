@@ -52,7 +52,6 @@ NILRT_NXG_PACKAGES = "\
 	modutils-initscripts \
 	rauc \
 	rauc-mark-good \
-	packagegroup-ni-minimal-transconf \
 	rtctl \
 	salt-minion \
 	connman \
