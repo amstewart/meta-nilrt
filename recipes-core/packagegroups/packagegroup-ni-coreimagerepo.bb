@@ -10,7 +10,6 @@ RDEPENDS_${PN} = "\
 	packagegroup-ni-crio \
 	packagegroup-ni-ptest \
 	packagegroup-ni-restoremode \
-	packagegroup-ni-runmode \
 	packagegroup-ni-transconf \
 	${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
 	packagegroup-core-standalone-sdk-target \

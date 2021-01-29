@@ -91,15 +91,25 @@ RDEPENDS_${PN} = "\
 	curl \
 	daemonize \
 	dhcp-client \
+	dosfstools \
 	dpkg-start-stop \
+	e2fsprogs \
+	e2fsprogs-e2fsck \
+	e2fsprogs-mke2fs \
+	e2fsprogs-tune2fs \
 	efibootmgr \
 	ethtool \
 	eudev \
+	gdbserver \
+	glibc-gconv-cp932 \
+	glibc-gconv-cp936 \
+	glibc-gconv-iso8859-1 \
 	gptfdisk-sgdisk \
 	hwclock-init \
 	initscripts \
 	initscripts-nilrt \
 	iproute2 \
+	iproute2-tc \
 	iptables \
 	iw \
 	jq \
@@ -113,13 +123,15 @@ RDEPENDS_${PN} = "\
 	libnss-mdns \
 	libpam \
 	librtpi \
+	librtpi \
+	lldpd \
 	lsbinitscripts \
 	netbase \
 	ni-systemformat \
 	ni-utils \
 	ni-safemode-utils \
 	niacctbase \
-	openssh-sshd \
+	niwatchdogpet \
 	openssh-scp \
 	openssh-sftp-server \
 	openssh-ssh \
@@ -129,13 +141,17 @@ RDEPENDS_${PN} = "\
 	opkg-keyrings \
 	opkg-utils \
 	os-release \
+	parted \
 	rauc \
 	rfkill \
+	rtctl \
 	run-postinsts \
 	sudo \
 	syslog-ng \
+	systemimageupdateinfo \
 	sysvinit \
 	tar \
+	tbtadm \
 	ti-wifi-utils \
 	tzdata \
 	tzdata-africa \
@@ -151,9 +167,12 @@ RDEPENDS_${PN} = "\
 	util-linux-hwclock \
 	util-linux-mount \
 	util-linux-runuser \
+	util-linux-sfdisk \
 	util-linux-umount \
+	vlan \
 	wireless-regdb \
 	wpa-supplicant \
+	zip \
 	${@bb.utils.contains('MACHINE_FEATURES', 'keyboard', 'keymaps', '', d)} \
 	${@bb.utils.contains('MACHINE_FEATURES', 'acpi', 'busybox-acpid', '', d)} \
 	${VIRTUAL-RUNTIME_mountpoint} \
