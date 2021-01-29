@@ -86,6 +86,7 @@ RDEPENDS_${PN} = "\
 	busybox \
 	coreutils-hostname \
 	crio-support-scripts \
+	crda \
 	cronie \
 	curl \
 	daemonize \
@@ -100,6 +101,7 @@ RDEPENDS_${PN} = "\
 	initscripts-nilrt \
 	iproute2 \
 	iptables \
+	iw \
 	jq \
 	kernel-modules \
 	kmod \
@@ -107,6 +109,7 @@ RDEPENDS_${PN} = "\
 	libavahi-common \
 	libavahi-core \
 	libcap-bin\
+	libnl \
 	libnss-mdns \
 	libpam \
 	librtpi \
@@ -121,16 +124,19 @@ RDEPENDS_${PN} = "\
 	openssh-sftp-server \
 	openssh-ssh \
 	openssh-sshd \
+	openssl \
 	opkg \
 	opkg-keyrings \
 	opkg-utils \
 	os-release \
 	rauc \
+	rfkill \
 	run-postinsts \
 	sudo \
 	syslog-ng \
 	sysvinit \
 	tar \
+	ti-wifi-utils \
 	tzdata \
 	tzdata-africa \
 	tzdata-americas \
@@ -146,6 +152,8 @@ RDEPENDS_${PN} = "\
 	util-linux-mount \
 	util-linux-runuser \
 	util-linux-umount \
+	wireless-regdb \
+	wpa-supplicant \
 	${@bb.utils.contains('MACHINE_FEATURES', 'keyboard', 'keymaps', '', d)} \
 	${@bb.utils.contains('MACHINE_FEATURES', 'acpi', 'busybox-acpid', '', d)} \
 	${VIRTUAL-RUNTIME_mountpoint} \

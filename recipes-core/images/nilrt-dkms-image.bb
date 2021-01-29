@@ -2,8 +2,15 @@ DESCRIPTION = "Runmode image for ethernet-based NI Linux Real-Time targets runni
 
 IMAGE_INSTALL = "\
 	packagegroup-ni-runmode \
-	packagegroup-ni-wifi \
 	dkms \
+	crda \
+	iw \
+	libnl \
+	openssl \
+	rfkill \
+	ti-wifi-utils \
+	wpa-supplicant \
+	wireless-regdb \
 	"
 
 require niconsole-image.inc
