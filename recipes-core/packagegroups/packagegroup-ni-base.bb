@@ -86,6 +86,7 @@ RDEPENDS_${PN} = "\
 	coreutils-hostname \
 	crio-support-scripts \
 	crda \
+	crio-support-scripts \
 	cronie \
 	curl \
 	daemonize \
