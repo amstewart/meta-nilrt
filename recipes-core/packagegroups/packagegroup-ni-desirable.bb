@@ -14,7 +14,6 @@ RDEPENDS_${PN} += "\
 
 RDEPENDS_${PN}_append_x64 = "\
 	packagegroup-ni-next-kernel \
-	packagegroup-ni-mono-extra \
 "
 
 RDEPENDS_${PN} += "\
@@ -48,4 +47,13 @@ RDEPENDS_${PN} += "\
 	strace \
 	valgrind \
 	vim \
+"
+
+# Mono runtime packages
+RDEPENDS_${PN} += "\
+	fsharp \
+	gtk-sharp \
+	mono \
+	mono-helloworld \
+	mozroot-certdata \
 "
