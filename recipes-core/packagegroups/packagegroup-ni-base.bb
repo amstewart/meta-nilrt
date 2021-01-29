@@ -83,9 +83,7 @@ RDEPENDS_${PN} = "\
 	base-files \
 	base-files-nilrt \
 	base-passwd \
-	${@bb.utils.contains('MACHINE_FEATURES', 'keyboard', 'keymaps', '', d)} \
 	busybox \
-	${@bb.utils.contains('MACHINE_FEATURES', 'acpi', 'busybox-acpid', '', d)} \
 	coreutils-hostname \
 	crio-support-scripts \
 	cronie \
@@ -95,14 +93,16 @@ RDEPENDS_${PN} = "\
 	dpkg-start-stop \
 	efibootmgr \
 	ethtool \
+	eudev \
 	gptfdisk-sgdisk \
+	hwclock-init \
 	initscripts \
 	initscripts-nilrt \
 	iproute2 \
 	iptables \
 	jq \
-	kmod \
 	kernel-modules \
+	kmod \
 	libavahi-client \
 	libavahi-common \
 	libavahi-core \
@@ -112,17 +112,18 @@ RDEPENDS_${PN} = "\
 	librtpi \
 	lsbinitscripts \
 	netbase \
-	niacctbase \
 	ni-systemformat \
 	ni-utils \
 	ni-safemode-utils \
+	niacctbase \
 	openssh-sshd \
 	openssh-scp \
 	openssh-sftp-server \
 	openssh-ssh \
+	openssh-sshd \
 	opkg \
-	opkg-utils \
 	opkg-keyrings \
+	opkg-utils \
 	os-release \
 	rauc \
 	run-postinsts \
@@ -130,14 +131,23 @@ RDEPENDS_${PN} = "\
 	syslog-ng \
 	sysvinit \
 	tar \
-	eudev \
+	tzdata \
+	tzdata-africa \
+	tzdata-americas \
+	tzdata-asia \
+	tzdata-atlantic \
+	tzdata-australia \
+	tzdata-europe \
+	tzdata-misc \
+	tzdata-pacific \
 	udev-extraconf \
 	util-linux-agetty \
-	hwclock-init \
 	util-linux-hwclock \
 	util-linux-mount \
-	util-linux-umount \
 	util-linux-runuser \
+	util-linux-umount \
+	${@bb.utils.contains('MACHINE_FEATURES', 'keyboard', 'keymaps', '', d)} \
+	${@bb.utils.contains('MACHINE_FEATURES', 'acpi', 'busybox-acpid', '', d)} \
 	${VIRTUAL-RUNTIME_mountpoint} \
 	${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
 	${@bb.utils.contains('TARGET_ARCH', 'arm', \

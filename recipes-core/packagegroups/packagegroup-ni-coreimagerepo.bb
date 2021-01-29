@@ -12,7 +12,6 @@ RDEPENDS_${PN} = "\
 	packagegroup-ni-restoremode \
 	packagegroup-ni-runmode \
 	packagegroup-ni-transconf \
-	packagegroup-ni-tzdata \
 	packagegroup-ni-wifi \
 	${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
 	packagegroup-core-standalone-sdk-target \

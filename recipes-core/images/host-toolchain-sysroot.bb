@@ -9,7 +9,6 @@ BUILD_IMAGES_FROM_FEEDS="0"
 
 IMAGE_INSTALL = "\
     packagegroup-ni-base \
-    packagegroup-ni-tzdata \
     packagegroup-core-standalone-sdk-target \
     "
 

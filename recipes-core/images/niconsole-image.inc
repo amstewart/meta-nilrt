@@ -14,7 +14,6 @@ IMAGE_ROOTFS_EXTRA_SPACE = "500000"
 
 IMAGE_INSTALL += "\
 	packagegroup-ni-base \
-	packagegroup-ni-tzdata \
 "
 
 addtask image_build_test before do_rootfs

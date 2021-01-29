@@ -31,7 +31,6 @@ IMAGE_INSTALL_NODEPS += "\
 	packagegroup-ni-base \
 	packagegroup-ni-runmode \
 	packagegroup-ni-transconf \
-	packagegroup-ni-tzdata \
 	packagegroup-ni-wifi \
 	packagegroup-ni-xfce \
 "
