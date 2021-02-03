@@ -57,3 +57,13 @@ RDEPENDS_${PN} += "\
 	mono-helloworld \
 	mozroot-certdata \
 "
+
+# Kernel module build tools
+RDEPENDS_${PN} += "\
+	binutils \
+	gcc \
+	gcc-symlinks \
+	kernel-dev \
+	kernel-devsrc \
+	make \
+"
