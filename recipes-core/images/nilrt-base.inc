@@ -29,8 +29,8 @@ IMAGE_INSTALL_NODEPS += "\
 # user software
 IMAGE_INSTALL_NODEPS += "\
 	packagegroup-ni-base \
+	packagegroup-ni-desktop \
 	packagegroup-ni-transconf \
-	packagegroup-ni-xfce \
 "
 
 addtask image_build_test before do_rootfs

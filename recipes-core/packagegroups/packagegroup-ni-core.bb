@@ -7,6 +7,7 @@ RDEPENDS_${PN} = "\
 	packagegroup-base \
 	packagegroup-core-boot \
 	packagegroup-ni-base \
+	packagegroup-ni-desktop \
 	packagegroup-ni-ptest \
 	packagegroup-ni-restoremode \
 	packagegroup-ni-transconf \
@@ -20,6 +21,5 @@ RDEPENDS_${PN} = "\
 "
 
 RDEPENDS_${PN}_append_x64 = "\
-	${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-ni-xfce', '', d)} \
 	init-nilrt-ramfs \
 "
