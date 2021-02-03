@@ -3,8 +3,9 @@ LICENSE = "MIT"
 
 NIBOOT_BUNDLE_IMAGE ?= ""
 
-PACKAGE_INSTALL = "${ROOTFS_BOOTSTRAP_INSTALL} \
-                   packagegroup-ni-restoremode \
+PACKAGE_INSTALL = "
+	packagegroup-ni-recovery \
+	${ROOTFS_BOOTSTRAP_INSTALL} \
 "
 
 IMAGE_FEATURES += "empty-root-password"

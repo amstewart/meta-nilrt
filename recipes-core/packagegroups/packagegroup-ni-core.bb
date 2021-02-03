@@ -9,7 +9,7 @@ RDEPENDS_${PN} = "\
 	packagegroup-ni-base \
 	packagegroup-ni-desktop \
 	packagegroup-ni-ptest \
-	packagegroup-ni-restoremode \
+	packagegroup-ni-recovery \
 	packagegroup-ni-transconf \
 	${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagegroup-core-x11', '', d)} \
 	packagegroup-core-standalone-sdk-target \
