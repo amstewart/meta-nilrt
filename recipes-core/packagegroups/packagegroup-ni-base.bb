@@ -84,7 +84,6 @@ RDEPENDS_${PN} = "\
 	base-passwd \
 	busybox \
 	coreutils-hostname \
-	crio-support-scripts \
 	crda \
 	crio-support-scripts \
 	cronie \
@@ -123,13 +122,12 @@ RDEPENDS_${PN} = "\
 	libnss-mdns \
 	libpam \
 	librtpi \
-	librtpi \
 	lldpd \
 	lsbinitscripts \
 	netbase \
+	ni-safemode-utils \
 	ni-systemformat \
 	ni-utils \
-	ni-safemode-utils \
 	niacctbase \
 	niwatchdogpet \
 	openssh-scp \
