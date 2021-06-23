@@ -10,7 +10,6 @@ BOOTFS_MOUNTPOINT=/var/volatile/nibootfs
 ROOTFS_MOUNTPOINT=/var/volatile/nirootfs
 TEMP_MOUNTPOINT=/var/volatile/temp_dir
 TARGET_DISK=""
-TARGET_DISK_SEARCH_TIME=10
 NIRESTORE_LABEL=nirestore
 NILRT_LABEL=nilrt
 OLDER_NILRT_NIBOOTFS_LABEL=nibootfs
@@ -228,9 +227,12 @@ elif [ "$ARCH" = "x86_64" ]; then
 		return 0
 	}
 
-	find_target_block_device()
-	{
-		local selected_block=""
+	# Search through the block sysfs entries and present the user with a
+	# selection of valid block devices. Allow them to choose from the selection
+	# and print either selection to stdout.
+	choose_target_block_device() {
+		declare -a candidate_blocks
+		local target_disk=""
 		local mmc_ok=false
 
 		# Check if the machine's DeviceCode is in the MMC device whitelist.
@@ -243,26 +245,56 @@ elif [ "$ARCH" = "x86_64" ]; then
 				(( verbose_mode )) && echo "Warning: eMMC device whitelist not found. eMMC block devices will be disqualified from provisioning." >&2
 		fi
 
+		# Wait for udev to finish populating the sysfs entries; we will use
+		# them in the later functions. 'udevadm settle' may block for up to 120
+		# seconds.
+		(( verbose_mode )) && echo "Waiting for udev to populate sysfs ..." >&3
+		udevadm settle
 
+		# Construct the candidate_blocks array from entries in the /sys/block
+		# sysfs. Skip invalid block devices.
 		for path in /sys/block/*; do
 			path_abbrev=${path##/sys/block/}
 			local block=$(udevadm info -r --query=name --path=$path)
-			check_block_device $path $block $mmc_ok || continue
-
-			# Looks good. Select the first device we see.
-			if [[ $selected_block ]]; then
-				(( verbose_mode )) && echo "SKIPPED block device $path_abbrev" >&2
-			else
-				selected_block=$block
-				(( verbose_mode )) && echo "SELECTED block device $path_abbrev" >&2
+			if $(check_block_device $path $block $mmc_ok); then
+				candidate_blocks+=($block)
 			fi
 		done
 
-		if [[ $selected_block ]]; then
-			echo "$selected_block"
-		else
-			return 1
+		if [ ${#candidate_blocks[@]} -eq 0 ]; then
+			die "No installation-candidate block devices found."
 		fi
+
+		# Prompt user to select their target disk
+		while [ -z "${target_disk}" ]; do
+			local b=0
+			local selection=""
+			echo "------------------------" >&3
+			echo "Candidate block devices:" >&3
+			for block_device in ${candidate_blocks[@]}; do
+				{
+					printf "\t[%d] %s" $b "$block_device"
+					if [ $b -eq 0 ]; then
+						printf " (RECOMMENDED)"
+					fi
+					printf "\n"
+				} >&3
+				b+=1
+			done
+
+			printf "\nWhich block device should be provisioned? > " >&3
+			read selection
+
+			if [[ "$selection" =~ ^[0-9]+$ ]] && [[ "$selection" -lt "${#candidate_blocks[@]}" ]]; then
+				target_disk="${candidate_blocks[$selection]}"
+				echo "Selected target disk: ${target_disk}" >&2
+			else
+				echo "Expected a number between 0 and" $(( ${#candidate_blocks[@]}-1 )) >&2
+			fi
+		done
+
+		# return the target disk
+		echo "$target_disk"
 	}
 
 	restore_runmode_image()
@@ -542,29 +574,18 @@ early_setup()
 		MKFS_ARGS="$VERBOSE_ARGS -F"
 	fi
 
-	if [[ -z $TARGET_DISK ]]; then
-		local search_begin="`get_time_delta 0`"
-		while [ "`get_time_delta "$search_begin"`" -le "$TARGET_DISK_SEARCH_TIME" ]; do
-			(( verbose_mode )) && echo "Searching for TARGET_DISK..." >&2
-			TARGET_DISK="`find_target_block_device`" || TARGET_DISK=""
-			if [[ -z $TARGET_DISK ]]; then
-				(( verbose_mode )) && echo "not found" >&2
-				sleep 1
-			else
-				(( verbose_mode )) && echo "found TARGET_DISK=$TARGET_DISK" >&2
-				break
-			fi
-		done
-
-		if [[ -z $TARGET_DISK ]]; then
-			die "No target device found for installation after $TARGET_DISK_SEARCH_TIME seconds."
-		fi
-	else
-		if [[ ! -e $TARGET_DISK ]]; then
-		>&4 echo -e ${red}"Error: DEVICE $TARGET_DISK does not exist."${NC}
+	if [ -n "${TARGET_DISK}" ]; then
+		# TARGET_DISK variable bypasses block device searching. But we still
+		# error, if the device does not exist.
+		if [ ! -e "${TARGET_DISK}" ]; then
+			>&4 echo -e ${red}"Error: DEVICE $TARGET_DISK does not exist."${NC}
 			show_help
 			exit 1
 		fi
+	else
+		# Search the system block devices for matches and prompt the user for
+		# confirmation about which block device we should provision.
+		TARGET_DISK=$(choose_target_block_device)
 	fi
 
 	# separate partition number from block device names ending in a digit
@@ -673,4 +694,3 @@ prompt_user()
 		echo "$question: $var (auto)"
 	fi
 }
-
