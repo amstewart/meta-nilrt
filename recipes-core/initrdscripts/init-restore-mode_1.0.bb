@@ -6,11 +6,6 @@ SRC_URI = "\
 	file://init-restore-mode.sh \
 "
 
-SRC_URI_append_x64 = "\
-	file://grub.cfg	\
-"
-
-
 do_install() {
 	install -m 0755 ${WORKDIR}/init-restore-mode.sh ${D}/init
 }
@@ -24,4 +19,3 @@ RDEPENDS_${PN} += "bash ni-provisioning"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES_${PN} += "/init"
-FILES_${PN}_append_x64 += " /grub.cfg "
