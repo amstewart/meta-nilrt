@@ -1,5 +1,6 @@
 #!/bin/bash
 
+LIB_PROVISIONING=/lib/ni-provisioning
 INVALID_NILRT_ID_MSG="Invalid value for PROVISION_PART_NILRT_ID. Use UUID=<value> or PARTUUID=<value> or auto."
 
 # verify required tools are installed
@@ -11,8 +12,8 @@ for toolName in poweroff reboot mount umount sync ls rm ln mkdir cp echo printf 
 	fi
 done
 
-if [ -e /ni_provisioning.common ]; then
-	source /ni_provisioning.common
+if [ -e ${LIB_PROVISIONING}/ni_provisioning.common ]; then
+	source ${LIB_PROVISIONING}/ni_provisioning.common
 else
 	printf "\n***Error: File ni_provisioning.common not found!\n"
 	printf "PROVISIONING FAILED!"
@@ -40,14 +41,14 @@ if [[ $restore == "provision-safe" ]]; then
 	fi
 
 	if [[ $PROVISION_REPARTITION_TARGET == "y" ]]; then
-		source /ni_provisioning.safemode
+		source ${LIB_PROVISIONING}/ni_provisioning.safemode
 		if [[ "${FORCE_PROVISIONING}" -eq 1 ]]; then
 			PROVISION_REBOOT_METHOD=${RESTART_OPTION}
 		fi
 		ASK_BEFORE_REBOOT=1
 	fi
 elif [[ $restore == "backward-migrate" ]]; then
-	source /ni_provisioning.safemode
+	source ${LIB_PROVISIONING}/ni_provisioning.safemode
 	ASK_BEFORE_REBOOT=1
 	PROVISION_REBOOT_METHOD="reboot"
 elif [[ $restore == "provision" ]]; then

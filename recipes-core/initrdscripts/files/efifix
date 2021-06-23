@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -e /ni_provisioning.common ]; then
-    source /ni_provisioning.common
+if [ -e /lib/ni-provisioning/ni_provisioning.common ]; then
+    source /lib/ni-provisioning/ni_provisioning.common
 else
     printf "\n***Error: File ni_provisioning.common not found!\n"
     printf "PROVISIONING FAILED!"
@@ -64,4 +64,3 @@ efibootmgr -v
 echo "---"
 
 echo -e ${GREEN}"EFI Recovery SUCCESSFUL!"${NC} 1>&3 2>&4
-

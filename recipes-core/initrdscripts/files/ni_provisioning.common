@@ -31,7 +31,7 @@ else
 fi
 
 # source reboot/poweroff functions since we don't have sysvinit in restore
-# tried adding in /init but the commands are not passed to /ni_provisioning context
+# tried adding in /init but the commands are not passed to ni_provisioning context
 if [ -e /etc/profile.d/00-init-restore-mode.sh ]; then
 	source /etc/profile.d/00-init-restore-mode.sh
 else
@@ -103,7 +103,7 @@ cleanup_and_exit()
 			poweroff
 		else
 			echo "Unmounting all file systems"
-			# unmounting rootfs kills /ni_provisioning right here,
+			# unmounting rootfs kills ni_provisioning right here,
 			# sync and "Dropping to shell" message will be skipped
 			umount -a -r -t norootfs,noproc,nosysfs,noefivarfs,nodevtmpfs
 			sync
@@ -121,8 +121,8 @@ die()
 	cleanup_and_exit 1
 }
 
-if [ -e /disk_config ]; then
-	source /disk_config
+if [ -e /usr/lib/ni-provisioning/disk_config ]; then
+	source /usr/lib/ni-provisioning/disk_config
 else
 	die "disk_config not found!"
 fi
@@ -641,10 +641,10 @@ check_answer_file()
 
 source_default_answer_file()
 {
-	if ! check_answer_file "/ni_provisioning.answers.default"; then
-		die "Missing or corrupt file /ni_provisioning.answers.default"
+	if ! check_answer_file "/usr/share/ni_provisioning.answers.default"; then
+		die "Missing or corrupt file /usr/share/ni_provisioning.answers.default"
 	fi
-	source "/ni_provisioning.answers.default"
+	source "/usr/share/ni_provisioning.answers.default"
 }
 
 source_answer_file()
