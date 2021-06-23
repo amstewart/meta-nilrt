@@ -104,11 +104,11 @@ if [[ $ARCH == "x86_64" ]]; then
 fi
 
 if [[ $ARCH =~ ^(x86_64|armv7l)$ ]]; then
-	/ni_provisioning
+	/usr/sbin/ni_provisioning
 else
 	echo ""
 	echo "ERROR: ARCH=$ARCH is not supported by provisioning tool."
-	echo " You can try running /ni_provisioning manually from the shell."
+	echo " You can try running ni_provisioning manually from the shell."
 	echo ""
 fi
 
