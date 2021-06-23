@@ -19,7 +19,6 @@ SRC_URI_append_xilinx-zynqhf = "\
 SRC_URI_append_x64 = "\
 	file://ni_provisioning.safemode \
 	file://disk_config_x64 \
-	file://grub.cfg	\
 "
 
 package_namespace = "ni-provisioning"
@@ -55,8 +54,6 @@ do_install() {
 do_install_append_x64() {
 	install -m 0644 ${WORKDIR}/ni_provisioning.safemode ${D_libdir}/
 	install -m 0755 ${WORKDIR}/disk_config_x64 ${D_libdir}/disk_config
-
-	install -m 0644 ${WORKDIR}/grub.cfg ${D_datadir}/
 }
 
 do_install_append_xilinx-zynqhf() {
@@ -66,4 +63,3 @@ do_install_append_xilinx-zynqhf() {
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES_${PN} += "/init /etc/profile.d/00-init-restore-mode.sh"
-FILES_${PN}_append_x64 += " /grub.cfg "
