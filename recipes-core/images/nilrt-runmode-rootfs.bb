@@ -57,5 +57,3 @@ bootimg_fixup() {
 }
 
 IMAGE_PREPROCESS_COMMAND += " bootimg_fixup; "
-
-IMAGE_FSTYPES += "squashfs tar.gz"
