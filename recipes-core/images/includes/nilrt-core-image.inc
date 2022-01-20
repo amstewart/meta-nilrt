@@ -1,7 +1,7 @@
 DESCRIPTION ?= "Base image setup used in all NILRT images"
 LICENSE = "MIT"
 
-IMAGE_FSTYPES = "tar.bz2"
+IMAGE_FSTYPES = "tar.gz"
 
 IMAGE_FEATURES ??= ""
 IMAGE_LINGUAS ??= ""
