@@ -1,5 +1,8 @@
 DESCRIPTION ?= "Base image setup used in all NILRT images"
 LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+PV = "${DISTRO_VERSION}"
 
 IMAGE_FSTYPES = "tar.gz"
 

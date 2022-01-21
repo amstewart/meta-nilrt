@@ -1,13 +1,8 @@
 DESCRIPTION = "NI Linux RT safemode rootfs archive"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-IMAGE_FSTYPES = "tar.gz"
 IMAGE_NAME_SUFFIX = ""
 
 DEPENDS += "${PREFERRED_PROVIDER_virtual/kernel}"
-
-PV = "${DISTRO_VERSION}"
 
 SRC_URI += "\
 	file://bootimage.ini \
@@ -84,4 +79,6 @@ ensure_expected_files() {
 
 IMAGE_PREPROCESS_COMMAND += " bootimg_fixup; ensure_expected_files; "
 
-inherit image
+require includes/nilrt-core-image.inc
+
+IMAGE_PREPROCESS_COMMAND_remove = "rootfs_update_timestamp;"
