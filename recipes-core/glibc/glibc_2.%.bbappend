@@ -19,5 +19,15 @@ SRC_URI =+ " \
 	file://alias-custom-locales.patch \
 "
 
+
+## package: locale-alias ##
 PACKAGES =+ " locale-alias "
-FILES_locale-alias = "/usr/share/locale/locale.alias*"
+FILES_locale-alias = "${datadir}/locale/locale.alias*"
+
+# The stash_locale_package_cleanup function deletes the /usr/share/locale
+# directory from the package/ staging area before it can be allocated to
+# locale-alias. Restore it before splitting subpackages.
+restore_locale_alias() {
+	install -D ${LOCALESTASH}${datadir}/locale/locale.alias ${PKGD}${datadir}/locale/locale.alias
+}
+PACKAGE_PREPROCESS_FUNCS += " restore_locale_alias "
