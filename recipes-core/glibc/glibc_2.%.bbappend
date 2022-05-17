@@ -18,3 +18,6 @@ SRC_URI =+ " \
 SRC_URI =+ " \
 	file://alias-custom-locales.patch \
 "
+
+PACKAGES =+ " locale-alias "
+FILES_locale-alias = "/usr/share/locale/locale.alias*"

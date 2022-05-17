@@ -19,6 +19,7 @@ RDEPENDS_${PN} = "\
 	glibc-gconv-cp932 \
 	glibc-gconv-cp936 \
 	glibc-gconv-iso8859-1 \
+	glibc-locale-locale.alias \
 	iproute2-tc \
 	librtpi \
 	linux-firmware-radeon \
