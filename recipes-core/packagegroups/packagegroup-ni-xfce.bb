@@ -21,16 +21,13 @@ RDEPENDS:${PN} += "\
 	mousepad \
 	ttf-pt-sans \
 	xf86-input-evdev \
+	xf86-video-ati \
+	xf86-video-intel \
+	xf86-video-vesa \
 	xfce-nilrt-settings \
 	xfce4-xkb-plugin \
 	xfontsel \
 	xorg-fonts-100dpi \
 	xrdb \
 	xserver-xfce-init \
-"
-
-RDEPENDS:${PN}:append:x64 += "\
-	xf86-video-ati \
-	xf86-video-intel \
-	xf86-video-vesa \
 "
