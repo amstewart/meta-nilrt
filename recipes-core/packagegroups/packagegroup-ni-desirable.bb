@@ -10,7 +10,7 @@ inherit packagegroup
 RDEPENDS:${PN} += "\
 	packagegroup-core-tools-debug \
 	packagegroup-ni-debug-kernel \
-	packagegroup-ni-ptest \
+	packagegroup-ni-ptest-smoke \
 	packagegroup-ni-selinux \
 "
 
