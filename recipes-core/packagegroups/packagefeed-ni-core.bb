@@ -11,7 +11,6 @@ RDEPENDS:${PN} = "\
 	packagegroup-ni-crio \
 	packagegroup-ni-graphical \
 	packagegroup-ni-internal-deps \
-	packagegroup-ni-nohz-kernel \
 	packagegroup-ni-ptest \
 	packagegroup-ni-restoremode \
 	packagegroup-ni-runmode \
