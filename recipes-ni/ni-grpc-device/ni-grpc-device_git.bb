@@ -10,15 +10,17 @@ LIC_FILES_CHKSUM = "\
 
 
 DEPENDS += "\
-	grpc-native \
 	googletest-native \
+	grpc \
+	grpc-native \
 	nlohmann-json-native \
+	protobuf \
 	protobuf-native \
 	python3-grpcio-tools-native \
 	python3-mako-native \
 	python3-native \
-	utf8cpp-native \
 	python3-schema-native \
+	utf8cpp-native \
 "
 
 PV = "2.4.0"
