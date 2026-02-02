@@ -96,6 +96,7 @@ RDEPENDS:${PN} += "\
 
 RDEPENDS:${PN}:append:x64 = "\
 	packagegroup-kernel-modules-essential \
+	clevis \
 	cryptsetup \
 	dmidecode \
 	e2fsprogs \
